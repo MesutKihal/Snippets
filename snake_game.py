@@ -45,10 +45,12 @@ def drawScreen():
     #    coor_x.append(x)
     #    coor_y.append(y)
     pygame.draw.rect(window, (255,0,0), (x,y,w,h))
-    for i in range(1, size):
+    for i in range(2, size):
         pygame.draw.rect(window, (255,0,0), (coor_x[-i],coor_y[-i],w,h))
-        if coor_x[-i] <= x <= coor_x[-i] + w and coor_y[-i] <= y + w <= coor_y[-i] + w:
-            print('dead')
+        if coor_x[-i] < x < coor_x[-i] + w and coor_y[-i] < y + h < coor_y[-i] + h:
+            print("collision")
+        if x < coor_x[-i] + w < x + w and coor_y[-i] < y < coor_y[-i] + h:
+            print("collision")
     pygame.draw.rect(window, (0,255,0), (bate_x,bate_y,10,10))
     window.blit(size_txt, (900, 20))
     pygame.display.update()
