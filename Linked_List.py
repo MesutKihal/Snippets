@@ -59,7 +59,17 @@ class LinkedList:
         if len(self.list):
             self.list[-2].set_next(self.list[-1].get_next())
         self.list.pop()
-        
+
+    def remove(self, index):
+        try:
+            if len(self.list) > 1:
+                self.list[index-1].set_next(self.list[index+1])
+                self.list.pop(index)
+            else:
+                self.list.pop(index)
+                self.head = None
+        except IndexError:
+            self.pop()
     def size(self):
         return len(self.list)
 

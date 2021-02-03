@@ -62,13 +62,14 @@ class LinkedList:
         
     def remove(self, index):
         try:
-            self.list[index-1].set_next(self.list[index+1])
-            self.list.pop(index)
-        except IndexError:
-            if index <= 0:
-                self.list.head = self.index[1]
+            if len(self.list) > 1:
+                self.list[index-1].set_next(self.list[index+1])
+                self.list.pop(index)
             else:
-                pass
+                self.list.pop(index)
+                self.head = None
+        except IndexError:
+            self.pop()
     def size(self):
         return len(self.list)
 
@@ -78,10 +79,11 @@ class HashTable:
         self.table = [None] * self.size
 
     def __repr__(self):
+        max_len = 8
         hash_table_scheme = ''
         i = 0
         for ll in self.table:
-            hash_table_scheme += str(i).ljust(8)
+            hash_table_scheme += '|'+str(i).rjust(4) + '|'.center(8)
             if ll != None:
                 temp = ll.list[0]
                 list_scheme = ''
@@ -92,10 +94,13 @@ class HashTable:
                     else:
                         list_scheme += str(temp)+str(" --> ")
                     temp = temp.get_next()
+                if len(list_scheme) > max_len:
+                    max_len = len(list_scheme)
                 hash_table_scheme += list_scheme + '\n'
             else:
-                hash_table_scheme += 'None\n'
+                hash_table_scheme += 'None' + '\n'
             i += 1
+        hash_table_scheme = '|'+'Index'.rjust(6)+ '|'.center(4) +'Item'.rjust(6)+'\n'+'|'+'-'*7+'|'+'-'*(max_len+4)+'\n' + hash_table_scheme
         return hash_table_scheme
 
     def hash_(self, item):
@@ -145,5 +150,6 @@ ht.insert('stfezfc')
 ht.insert('fhbc')
 ht.insert('zrry')
 ht.insert('r4dg')
+
 print(ht)
 
