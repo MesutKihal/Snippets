@@ -1,4 +1,4 @@
-#Graph implemention - Adjacency Matrix
+#Graph implemention - Paires
 
 class Node:
 
@@ -11,36 +11,36 @@ class Node:
         
 class Graph(Node):
 
-    def __init__(self, size):
-        self.size = size
+    def __init__(self):
+        self.pairs = dict()
         self.vertices = []
-        self.matrix = [[0 for _ in range(size)] for _ in range(size)]
         
     def __repr__(self):
-        graph_scheme = ' '*4+'  '.join([str(i) for i in range(len(self.vertices))])+'\n'
+        graph_scheme = ''
         i = 0
         for vertex in self.vertices:
-            graph_scheme += str(i)+"  "
-            graph_scheme += str(self.matrix[i])
+            graph_scheme += str(i)+" |  "
+            graph_scheme += str(self.pairs[i])
             graph_scheme += '\n'
             i += 1
         return graph_scheme
     
     def add_vertex(self, node):
-        if len(self.vertices) < self.size:
-            self.vertices.append(node)
-        else:
-            print('Graph full!')
+        self.vertices.append(node)
 
     def add_edge(self,node,destination):
-        self.matrix[node][destination] += 1
+        try:
+            self.pairs[node].add((node, destination))
+        except KeyError:
+            self.pairs[node] = set()
+            self.pairs[node].add((node, destination))
         self.vertices[node].edge.append(self.vertices[destination])
         
     def display_vertex(self,index):
         node = self.vertices[index]
         return "node("+str(type(node.data))[8:-2]+"("+str(node.data)+")"+")"
 
-g = Graph(4)
+g = Graph()
 g.add_vertex(Node("213"))
 g.add_vertex(Node(True))
 g.add_vertex(Node(21))
@@ -50,5 +50,6 @@ g.add_edge(0,2)
 g.add_edge(1,3)
 g.add_edge(2,3)
 g.add_edge(3,0)
+print(g.vertices[0])
 print(g.display_vertex(0))
 print(g)

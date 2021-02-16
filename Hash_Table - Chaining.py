@@ -41,6 +41,8 @@ class LinkedList:
         self.list.append(Node(data))
         if len(self.list) > 1:
             self.list[-2].set_next(self.list[-1])
+        else:
+            self.head = self.list[0]
     
     def insert(self, data, index):
         if len(self.list) == 0:
