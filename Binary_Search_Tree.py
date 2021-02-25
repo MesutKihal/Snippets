@@ -6,17 +6,14 @@ class Node:
         self.value = value
         self.left = None
         self.right = None
-
-    def __repr__(self):
-        if self.right and self.left:
-            return str(self.value) +' '+ str(self.left.value) +' '+ str(self.right.value)
-        elif self.right and not self.left:
-            return str(self.value) +' '+ '*' +' '+ str(self.right.value)
-        elif not self.right and self.left:
-            return str(self.value) +' '+ str(self.left.value) +' '+ '*'
-        else:
-            return str(self.value) +' '+ '*' +' '+ '*'
+        self.tree = []
         
+    def __repr__(self):
+        self.tree.append(self.left)
+        self.tree.append(self.value)
+        self.tree.append(self.right)
+        return str(self.tree)
+            
     def insert(self, value):
         if value < self.value:
             if self.left is None:
@@ -53,3 +50,4 @@ root.insert(4)
 root.insert(2)
 root.search(2)
 print(root)
+
