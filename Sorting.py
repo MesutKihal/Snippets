@@ -85,10 +85,10 @@ def extend_list(left, right, pivot):
 def quick_sort(arr):
     if len(arr) == 0:
         return arr
-    pivot = arr[-1]
-    if len(arr) == 1:
+    elif len(arr) == 1:
         return arr
     else:
+        pivot = arr[-1]
         left = list(filter(lambda x:x<pivot, arr))
         right = list(filter(lambda x:x>pivot, arr))
         return extend_list(quick_sort(left), quick_sort(right), pivot)
