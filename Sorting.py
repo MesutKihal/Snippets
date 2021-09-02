@@ -1,3 +1,4 @@
+
 #   O(n)
 def selection_sort(arr):
     i = 0
@@ -8,7 +9,7 @@ def selection_sort(arr):
     return arr
 
 print(selection_sort([2, 7, 4, 1, 5, 3]))
-#   O(n^2)
+#   O(n²)
 def bubble_sort(arr):
     for i in range(0, len(arr)-1):
         swaps = 0
@@ -21,7 +22,7 @@ def bubble_sort(arr):
     return arr
 
 print(bubble_sort([2, 7, 4, 1, 5, 3]))
-#   O(n^2)
+#   O(n²)
 def insertion_sort(arr):
     sorted_arr = []
     for i in range(len(arr)):
@@ -75,3 +76,32 @@ def merge_sort(arr):
         return merge(merge_sort(arr[:mid]), merge_sort(arr[mid:]))
 
 print(merge_sort([2, 7, 4, 1, 5, 3]))
+#   O(nlogn)
+def extend_list(left, right, pivot):
+    left.extend([pivot])
+    left.extend(right)
+    return left
+
+def quick_sort(arr):
+    if len(arr) == 0:
+        return arr
+    pivot = arr[-1]
+    if len(arr) == 1:
+        return arr
+    else:
+        left = list(filter(lambda x:x<pivot, arr))
+        right = list(filter(lambda x:x>pivot, arr))
+        return extend_list(quick_sort(left), quick_sort(right), pivot)
+print(quick_sort([2, 7, 4, 1, 5, 3]))
+
+
+arr = [2, 7, 4, 1, 5, 3]
+h = Heap()
+for i in arr:
+    h.insert(i)
+print(h.items)
+arr = []
+for i in h.items:
+    for j in i[::-1]:
+        arr.append(j)
+print(arr)
