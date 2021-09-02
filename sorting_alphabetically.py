@@ -45,5 +45,4 @@ def merge_sort(arr):
     else:
         return merge(merge_sort(arr[:mid]), merge_sort(arr[mid:]))
 
-#print(merge_sort(arr))
-print(len(arr))
+print(merge_sort(arr))
