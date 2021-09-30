@@ -1,20 +1,25 @@
 
+
 values = [5, 7, 16, 6, 2, 3]
 
 weights = [2, 5, 1, 4, 8, 6]
 
-memo = [0 for _ in range(len(values))]
-def knapsac(target, weights, values, n, memo):
-    if target <= 0 or n <= 0:
-        return 0
-    else:
-        if not n in memo:
-            incl = values[n] + knapsac(target-weights[n], weights, values, n, memo)
-            excl = 0 + knapsac(target, weights, values, n-1, memo)
-            memo[n] = max([incl, excl])
-            return memo[n]
-        else:
-            return memo[n]
+def knapsac(target, values, weights, i=0, memo={}):
+     key = (target, i)
+     if key in memo:
+          return memo[key]
+     else:
+          if i == len(weights):
+               memo[key] = 0
+               return memo[key]
+          else:
+               if target <= 0:
+                    memo[key] = 0
+                    return memo[key]
+               else:
+                    rsl1 = values[i] + knapsac(target-weights[i], values, weights, i)
+                    rsl2 = knapsac(target, values, weights, i=i+1)
+                    memo[key] = max(rsl1, rsl2)
+                    return memo[key]
 
-print(knapsac(12, weights, values, len(weights)-1, memo))
-    
+print(knapsac(12, values, weights))
