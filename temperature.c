@@ -19,7 +19,7 @@ int main()
             printf("\nEnter your temperature in Fahrenheit: ");
             scanf("%i", &temp);
             float formula = (float) (temp - 32) / 1.8;
-            printf("\n%.2f C°", formula);
+            printf("\n%.2f °C", formula);
         }else{
             system("clear");
             temperatureConvert();
